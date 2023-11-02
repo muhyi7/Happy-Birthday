@@ -25,6 +25,7 @@ import com.polije.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingImage(message = "Happy Birthday Brother!", from = "From Muhyi" )
+                    GreetingImage(message = stringResource(R.string.happy_birthday_text), from = stringResource(
+                        R.string.signature_text
+                    ) )
                 }
             }
         }
@@ -52,13 +55,15 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier){
             text = message,
             fontSize = 100.sp,
             lineHeight = 116.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 16.dp)
         )
         Text(
             text = from,
             fontSize = 36.sp,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(top = 16.dp)
+                .padding(end = 16.dp)
                 .align(alignment = Alignment.End)
         )
     }
@@ -78,7 +83,7 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier){
         GreetingText(
             message = message,
             from = from,
-            modifier =Modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
         )
@@ -90,6 +95,7 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier){
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingImage(message = "Happy Birthday Brother!", from = "From Muhyi")
+        GreetingImage( stringResource(R.string.happy_birthday_text),
+            stringResource(R.string.signature_text))
     }
 }
