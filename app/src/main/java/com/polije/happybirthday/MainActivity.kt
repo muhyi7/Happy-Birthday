@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.polije.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingText(message = "Happy Birthday Brother!", from = "From Muhyi" )
+                    GreetingImage(message = "Happy Birthday Brother!", from = "From Muhyi" )
                 }
             }
         }
@@ -65,10 +67,22 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier){
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier){
     val image = painterResource(R.drawable.androidparty)
-    Image(
-        painter = image,
-        contentDescription = null
+    //Step 3 create a box to overlap image and texts
+    Box {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F
         )
+        GreetingText(
+            message = message,
+            from = from,
+            modifier =Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        )
+    }
 }
 
 
